@@ -1,0 +1,31 @@
+<div class='container'>
+  <div class='row'>
+        <% @restaurants.each_with_index do |restaurant, index| %>
+          <div class='col-6 col-lg-4'>
+            <div class='card mt-3'>
+            <img src="https://loremflickr.com/320/240/<%=restaurant.category%>,restaurant,dish/all?random=<%=index%>" class="card-img-top" alt="...">
+              <div class='card-body'>
+                <h5 class='card-title text-center'> <%= link_to "#{restaurant.name}", restaurant_path(restaurant), class: 'text-decoration-none' %></h5>
+                <p class='card-text'><%= "#{restaurant.address}"%></p>
+                <div class='row'>
+                  <div class='col-6'>
+                    <h6 class='card-text'><%= "#{restaurant.category.capitalize} Restaurant" %></h6>
+                  </div>
+                  <div class='col-6'>
+                    <% rating(restaurant).to_i.times do  %>
+                      <i class="bi bi-star-fill"></i>
+                    <% end %>
+                    <% (5 - rating(restaurant).to_i).times do  %>
+                      <i class="bi bi-star"></i>
+                    <% end %>
+                    <p><%= rating(restaurant) %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      <%= link_to "Add new Restaurant", new_restaurant_path, class: 'btn btn-primary my-5' %>
+  </div>
+</div>
